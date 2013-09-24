@@ -29,6 +29,11 @@ iD.modes.Scale = function(context, wayId) {
                 newAngle = Math.atan2(mousePoint[1] - pivot[1],mousePoint[0] - pivot[0]);
                 newDistance = Math.sqrt(Math.pow(mousePoint[1] - pivot[1], 2) + Math.pow(mousePoint[0] - pivot[0], 2));
                 scalingFactor = Math.cos(angle-newAngle) * newDistance / distance;
+                if(distance<30) {
+                    distance=newDistance;
+                    angle=newAngle;
+                    return;
+                }
             context.replace(
                 iD.actions.Scale(wayId, pivot, scalingFactor, context.projection),
                 annotation);
